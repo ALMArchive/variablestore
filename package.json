@@ -1,0 +1,26 @@
+{
+  "name": "variablestore",
+  "version": "0.0.1",
+  "description": "A variable data store using to privately store variables using a map like interface.",
+  "main": "variablestore.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ALMaclaine/variablestore.git"
+  },
+  "keywords": [
+    "Variable",
+    "Store",
+    "Data",
+    "Private",
+    "Map"
+  ],
+  "author": "Alessandro Maclaine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ALMaclaine/variablestore/issues"
+  },
+  "homepage": "https://github.com/ALMaclaine/variablestore#readme"
+}
