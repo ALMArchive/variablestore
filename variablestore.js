@@ -1,30 +1,32 @@
 "use strict";
 
+function validateRegex(reg) {
+   if(reg === undefined) return false;
+   return !(reg instanceof RegExp) ? false : true;
+}
+
+function toString(val) {
+   return val.toString() || (val + "");
+}
+
+function isString(str)    {
+   return typeof str === 'string';
+}
+
+function isObject(value) {
+  const type = typeof value;
+  return value != null && (type == 'object' && !(type === 'function'));
+}
+
 class VariableStore {
-   constructor(regex = /^[a-zA-Z\_]\w*$/, restrictedNames = ["ans"]) {
-      if(!Array.isArray(invalidNames)) throw new Error("Must bass array to second parameter of VariableStore");
+   constructor(regex = /^[a-zA-Z\_]\w*$/, restrictedNames = []) {
+      if(!validateRegex(regex))           throw new Error("Must pass regex to first parameter of VariableStore");
+      if(!Array.isArray(restrictedNames)) throw new Error("Must pass array to second parameter of VariableStore");
+
       let variables = {};
 
-      function toString(val) {
-         return val.toString() || (val + "");
-      }
-
-      function isString(str)    { return typeof str === 'string'; }
-
-      function isObject(value) {
-        const type = typeof value;
-        return value != null && (type == 'object' && !(type === 'function'));
-      }
-
       function validVariableName(varName) {
-         const reg = regex;
-         if(!reg.test(varName)) return false;
-         if(const val of invalidNames) {
-            if(varName === val) {
-               return false;
-            }
-         }
-         return true;
+         return (!regex.test(varName)) ? false : true;
       }
 
       function restrictedName(varName) {
@@ -36,9 +38,13 @@ class VariableStore {
       }
 
       this.set = function set(obj) {
-         if(!restrictedVariableName(obj)) {
+         if(restrictedName(obj.name)) {
             throw new Error(`Variable cannot be a reserved word. ${obj}`);
          }
+         _set(obj);
+      }
+
+      this.setRestricted = function setRestricted(obj) {
          _set(obj);
       }
 
@@ -50,13 +56,13 @@ class VariableStore {
             throw new Error("Attempting to set constant variable");
          }
          if(!validVariableName(obj.name)) {
-            throw new Error("Invalid variable name, must not be reserved word, start with number or contain non-alphanumeric characters excpet underscore");
+            throw new Error(`Invalid variable name, must satisfy regex: ${regex}`);
          }
-         variables[obj.name] = {value: obj.value, const: !!obj.const || false };
+         variables[obj.name] = {value: obj.value, const: !!obj.const};
       }
 
       this.get = function get(varName) {
-         if(!variables[varName]) {
+         if(!this.has(varName)) {
             throw new Error("Variable does not exist");
          }
          return variables[varName].value;
@@ -64,9 +70,7 @@ class VariableStore {
 
       this.del = function del(varName) {
          if(Array.isArray(varName)) {
-            for(let tmp of varName) {
-               delete variables[tmp];
-            }
+            varName.map((elem) => delete variables[elem]);
          } else {
             delete variables[varName];
          }
