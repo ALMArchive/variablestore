@@ -199,7 +199,7 @@ Will throw an error if the variable name doesn't match the regex.
 
 #### has
 Returns boolen value of whether value is in variable store.
-```
+```javascript
 const regex    = /^[a-zA-Z\_]\w*$/;
 const restrictedNames = ["ans"];
 const varStore = new VariableStore(regex, restrictedNames);
@@ -216,8 +216,7 @@ console.log(varStore.has("foo")); // false
 
 #### get
 Will retrieve the variable value from the store, or throw an error if it does not contain variable.
-
-```
+```javascript
 const VariableStore = require('../variablestore.js');
 
 const regex    = /^[a-zA-Z\_]\w*$/;
@@ -241,7 +240,7 @@ Throws error if an invalid variable is accessed.
 
 #### del
 Used to delete variables from VariableStore, either single name, or array of names.
-```
+```javascript
 const VariableStore = require('../variablestore.js');
 
 const regex    = /^[a-zA-Z\_]\w*$/;
@@ -272,7 +271,7 @@ varStore.del("h");
 
 #### clear
 Used to clear variables, including constants.
-```
+```javascript
 const VariableStore = require('../variablestore.js');
 
 const regex    = /^[a-zA-Z\_]\w*$/;
@@ -293,7 +292,7 @@ console.log(varStore.has("b")); // false
 
 #### getVariableNames
 Returns an array of all variable names currently in store.
-```
+```javascript
 const regex    = /^[a-zA-Z\_]\w*$/;
 const restrictedNames = ["ans"];
 const varStore = new VariableStore(regex, restrictedNames);
@@ -308,7 +307,7 @@ console.log(varStore.getVariableNames()); // ["a", "b"]
 
 #### getVariableObjects
 Returns an array of all variable names currently in store.
-```
+```javascript
 const regex    = /^[a-zA-Z\_]\w*$/;
 const restrictedNames = ["ans"];
 const varStore = new VariableStore(regex, restrictedNames);
@@ -332,4 +331,4 @@ To run the main example.
 `npm run ex`
 
 ## License
-RegReplace.js is released under the MIT license.
+VariableStore.js is released under the MIT license.
