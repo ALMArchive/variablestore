@@ -39,7 +39,7 @@ class VariableStore {
 
       this.set = function set(obj) {
          if(restrictedName(obj.name)) {
-            throw new Error(`Variable cannot be a reserved word. ${obj}`);
+            throw new Error(`Variable cannot be a reserved word: ${obj.name}`);
          }
          _set(obj);
       }
