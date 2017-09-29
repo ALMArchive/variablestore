@@ -57,15 +57,22 @@ try {
 varStore.setRestricted({name: "ans", value: "b"});
 console.log(varStore.get("ans")); // "b"
 
-// Clear will empty all variables, including const
+// clear will empty all variables, including const
 varStore.set({name: "a", value: "b"});
 varStore.set({name: "b", value: "d"});
 console.log(varStore.getVariableNames()); // ["a", "b"]
 varStore.clear();
 console.log(varStore.getVariableNames()); // []
 
-// Variables declared as const cannot have their value change, will throw error
+// clearNonConst will empty all variables, except const
+varStore.set({name: "a", value: "b"});
+varStore.set({name: "b", value: "d"});
 varStore.set({name: "c", value: "c", const: true});
+console.log(varStore.getVariableNames()); // ["a", "b", "c"]
+varStore.clearNonConst();
+console.log(varStore.getVariableNames()); // ["c"]
+
+// Variables declared as const cannot have their value change, will throw error
 console.log(varStore.has("c")); // true
 
 try {

@@ -109,7 +109,7 @@ varStore.setRestricted({name: "ans", value: "b"});
 console.log(varStore.get("ans")); // "b"
 ```
 
-Clear will clean all variables, including const
+clear will clear all variables, including const
 ```javascript
 // Clear will empty all variables, including const
 varStore.set({name: "a", value: "b"});
@@ -119,10 +119,20 @@ varStore.clear();
 console.log(varStore.getVariableNames()); // []
 ```
 
+clearNonConst will clear all variables except const
+```javascript
+// clearNonConst will empty all variables, except const
+varStore.set({name: "a", value: "b"});
+varStore.set({name: "b", value: "d"});
+varStore.set({name: "c", value: "c", const: true});
+console.log(varStore.getVariableNames()); // ["a", "b", "c"]
+varStore.clearNonConst();
+console.log(varStore.getVariableNames()); // ["c"]
+```
+
 Cannot over write const values
 ```javascript
 // Variables declared as const cannot have their value change, will throw error
-varStore.set({name: "c", value: "c", const: true});
 console.log(varStore.has("c")); // true
 
 try {
@@ -288,6 +298,24 @@ console.log(varStore.has("b")); // true
 varStore.clear();
 console.log(varStore.has("a")); // false
 console.log(varStore.has("b")); // false
+```
+
+#### clearNonConst
+Used to clear variables except constants
+```javascript
+const regex    = /^[a-zA-Z\_]\w*$/;
+const restrictedNames = ["ans"];
+const varStore = new VariableStore(regex, restrictedNames);
+
+// Insert variables
+varStore.set({name: "a", value: 2});
+varStore.set({name: "b", value: 3});
+varStore.set({name: "c", value: 4, const: true});
+console.log(varStore.has("a")); // true
+console.log(varStore.has("b")); // true
+
+// Clear will clear all variables including constant
+varStore.clearNonConst();
 ```
 
 #### getVariableNames

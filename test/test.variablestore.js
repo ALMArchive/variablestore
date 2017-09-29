@@ -144,6 +144,21 @@ describe("VariableStore", function() {
          chai.expect(varStore.getVariableNames().length).to.equal(0);
          chai.expect(isEmpty(varStore));
       });
+      it('clearNonConst should empty other than const', function() {
+         let varStore = new VariableStore();
+         varStore.set({name:"a", value:"b"});
+         varStore.set({name:"c", value:"d"});
+         varStore.set({name:"e", value:"f", const: true});
+         chai.expect(varStore.has("a")).to.be.true;
+         chai.expect(varStore.has("c")).to.be.true;
+         chai.expect(varStore.getVariableNames().length).to.equal(3);
+         chai.expect(!isEmpty(varStore));
+         varStore.clearNonConst();
+         chai.expect(varStore.has("a")).to.be.false;
+         chai.expect(varStore.has("c")).to.be.false;
+         chai.expect(varStore.getVariableNames().length).to.equal(1);
+         chai.expect(varStore.has("e"));
+      });
       it('get should return the same value that was entered', function() {
          let varStore = new VariableStore();
          varStore.set({name:"a", value:"b"});

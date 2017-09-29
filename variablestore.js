@@ -80,6 +80,16 @@ class VariableStore {
          variables = {};
       }
 
+      this.clearNonConst = function clearNonConst() {
+         let old = variables;
+         variables = {};
+         for(const prop in old) {
+             if(old[prop].const) {
+               variables[prop] = old[prop];
+             }
+         }
+      }
+
       this.getVariableNames = function getVariableNames() {
          return Object.keys(variables);
       }

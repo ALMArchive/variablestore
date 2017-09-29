@@ -4,7 +4,8 @@
   "description": "A variable data store using to privately store variables using a map like interface.",
   "main": "variablestore.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "ex": "node examples/main-example.js"
   },
   "repository": {
     "type": "git",
