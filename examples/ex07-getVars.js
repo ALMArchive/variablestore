@@ -9,7 +9,7 @@ varStore.set({name: "a", value: 2});
 varStore.set({name: "b", value: 3});
 
 // Get all variable names
-console.log(varStore.getVariableNames()); // ["a", "b"]
+console.log(varStore.variableNames); // ["a", "b"]
 
 // Get all variable objects
-console.log(varStore.getVariableObjects()); // [{a: {value: 2, const: false}}, {b: {value: 3, const: false}}]
+console.log(varStore.variables); // [{a: {value: 2, const: false}}, {b: {value: 3, const: false}}]

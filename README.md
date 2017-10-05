@@ -64,11 +64,11 @@ Retrieve all variable names or variable objects.
 // Add another variable
 varStore.set({name: "b", value: "b"}); // undefined
 
-// Can get all variable names with getVariableNames();
-console.log(varStore.getVariableNames()); // ["a", "b"]
+// Can get all variable names with variableNames;
+console.log(varStore.variableNames); // ["a", "b"]
 
-// Can get all stored objects with getVariableObjects
-console.log(varStore.getVariableObjects()); // [a: {value: "b", const: false}, b: {name: "b", const: false}]
+// Can get all stored objects with variables
+console.log(varStore.variables); // [a: {value: "b", const: false}, b: {name: "b", const: false}]
 ```
 
 Delete elements
@@ -114,9 +114,9 @@ clear will clear all variables, including const
 // Clear will empty all variables, including const
 varStore.set({name: "a", value: "b"});
 varStore.set({name: "b", value: "d"});
-console.log(varStore.getVariableNames()); // ["a", "b"]
+console.log(varStore.variableNames); // ["a", "b"]
 varStore.clear();
-console.log(varStore.getVariableNames()); // []
+console.log(varStore.variableNames); // []
 ```
 
 clearNonConst will clear all variables except const
@@ -125,9 +125,9 @@ clearNonConst will clear all variables except const
 varStore.set({name: "a", value: "b"});
 varStore.set({name: "b", value: "d"});
 varStore.set({name: "c", value: "c", const: true});
-console.log(varStore.getVariableNames()); // ["a", "b", "c"]
+console.log(varStore.variableNames); // ["a", "b", "c"]
 varStore.clearNonConst();
-console.log(varStore.getVariableNames()); // ["c"]
+console.log(varStore.variableNames); // ["c"]
 ```
 
 Cannot over write const values
@@ -159,6 +159,38 @@ const varStore2 = new VariableStore(regex);
 const varStore3 = new VariableStore(regex, restrictedNames);
 ```
 Returns VariableStore object.
+
+#### Computer Properties
+
+#### variableNames
+Returns an array of all variable names currently in store.
+```javascript
+const regex    = /^[a-zA-Z\_]\w*$/;
+const restrictedNames = ["ans"];
+const varStore = new VariableStore(regex, restrictedNames);
+
+// Insert variables
+varStore.set({name: "a", value: 2});
+varStore.set({name: "b", value: 3});
+
+// Get all variable names
+console.log(varStore.variableNames); // ["a", "b"]
+```
+
+#### variables
+Returns an array of all variable names currently in store.
+```javascript
+const regex    = /^[a-zA-Z\_]\w*$/;
+const restrictedNames = ["ans"];
+const varStore = new VariableStore(regex, restrictedNames);
+
+// Insert variables
+varStore.set({name: "a", value: 2});
+varStore.set({name: "b", value: 3});
+
+// Get all variable objects
+console.log(varStore.variables); // [{a: {value: 2, const: false}}, {b: {value: 3, const: false}}]
+```
 
 #### Methods
 
@@ -227,8 +259,6 @@ console.log(varStore.has("foo")); // false
 #### get
 Will retrieve the variable value from the store, or throw an error if it does not contain variable.
 ```javascript
-const VariableStore = require('../variablestore.js');
-
 const regex    = /^[a-zA-Z\_]\w*$/;
 const restrictedNames = ["ans"];
 const varStore = new VariableStore(regex, restrictedNames);
@@ -251,8 +281,6 @@ Throws error if an invalid variable is accessed.
 #### del
 Used to delete variables from VariableStore, either single name, or array of names.
 ```javascript
-const VariableStore = require('../variablestore.js');
-
 const regex    = /^[a-zA-Z\_]\w*$/;
 const restrictedNames = ["ans"];
 const varStore = new VariableStore(regex, restrictedNames);
@@ -282,8 +310,6 @@ varStore.del("h");
 #### clear
 Used to clear variables, including constants.
 ```javascript
-const VariableStore = require('../variablestore.js');
-
 const regex    = /^[a-zA-Z\_]\w*$/;
 const restrictedNames = ["ans"];
 const varStore = new VariableStore(regex, restrictedNames);
@@ -316,36 +342,6 @@ console.log(varStore.has("b")); // true
 
 // Clear will clear all variables including constant
 varStore.clearNonConst();
-```
-
-#### getVariableNames
-Returns an array of all variable names currently in store.
-```javascript
-const regex    = /^[a-zA-Z\_]\w*$/;
-const restrictedNames = ["ans"];
-const varStore = new VariableStore(regex, restrictedNames);
-
-// Insert variables
-varStore.set({name: "a", value: 2});
-varStore.set({name: "b", value: 3});
-
-// Get all variable names
-console.log(varStore.getVariableNames()); // ["a", "b"]
-```
-
-#### getVariableObjects
-Returns an array of all variable names currently in store.
-```javascript
-const regex    = /^[a-zA-Z\_]\w*$/;
-const restrictedNames = ["ans"];
-const varStore = new VariableStore(regex, restrictedNames);
-
-// Insert variables
-varStore.set({name: "a", value: 2});
-varStore.set({name: "b", value: 3});
-
-// Get all variable objects
-console.log(varStore.getVariableObjects()); // [{a: {value: 2, const: false}}, {b: {value: 3, const: false}}]
 ```
 
 ## Scripts

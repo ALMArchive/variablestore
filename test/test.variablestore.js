@@ -15,6 +15,7 @@ describe("VariableStore", function() {
    describe("Construction", function() {
       it('Returned object should be VariableStore on empty parameters', function() {
          let varStore = new VariableStore();
+         console.log("SDFSDFSDFSD"+varStore);
          chai.expect(varStore.constructor.name === "VariableStore");
       });
       it('Returned object should be VariableStore on (Regex)', function() {
@@ -54,19 +55,19 @@ describe("VariableStore", function() {
       });
    });
    describe("No Variables in Store", function() {
-      it('getVariableNames should return empty array on empty VariableStore', function() {
+      it('variableNames should return empty array on empty VariableStore', function() {
          let varStore = new VariableStore();
-         chai.expect(varStore.getVariableNames().length).to.equal(0);
+         chai.expect(varStore.variableNames.length).to.equal(0);
       });
-      it('getVariableObjects should return empty array on empty VariableStore', function() {
+      it('variables should return empty array on empty VariableStore', function() {
          let varStore = new VariableStore();
-         chai.expect(isEmpty(varStore.getVariableObjects())).to.be.true;
+         chai.expect(isEmpty(varStore.variables)).to.be.true;
       });
       it('clear should leave object with no variables', function() {
          let varStore = new VariableStore();
          varStore.clear();
-         chai.expect(varStore.getVariableNames().length).to.equal(0);
-         chai.expect(isEmpty(varStore.getVariableObjects())).to.be.true;
+         chai.expect(varStore.variableNames.length).to.equal(0);
+         chai.expect(isEmpty(varStore.variables)).to.be.true;
       });
    });
    describe("Adding Variables to Store", function() {
@@ -136,12 +137,12 @@ describe("VariableStore", function() {
          varStore.set({name:"c", value:"d"});
          chai.expect(varStore.has("a")).to.be.true;
          chai.expect(varStore.has("c")).to.be.true;
-         chai.expect(varStore.getVariableNames().length).to.equal(2);
+         chai.expect(varStore.variableNames.length).to.equal(2);
          chai.expect(!isEmpty(varStore));
          varStore.clear();
          chai.expect(varStore.has("a")).to.be.false;
          chai.expect(varStore.has("c")).to.be.false;
-         chai.expect(varStore.getVariableNames().length).to.equal(0);
+         chai.expect(varStore.variableNames.length).to.equal(0);
          chai.expect(isEmpty(varStore));
       });
       it('clearNonConst should empty other than const', function() {
@@ -151,12 +152,12 @@ describe("VariableStore", function() {
          varStore.set({name:"e", value:"f", const: true});
          chai.expect(varStore.has("a")).to.be.true;
          chai.expect(varStore.has("c")).to.be.true;
-         chai.expect(varStore.getVariableNames().length).to.equal(3);
+         chai.expect(varStore.variableNames.length).to.equal(3);
          chai.expect(!isEmpty(varStore));
          varStore.clearNonConst();
          chai.expect(varStore.has("a")).to.be.false;
          chai.expect(varStore.has("c")).to.be.false;
-         chai.expect(varStore.getVariableNames().length).to.equal(1);
+         chai.expect(varStore.variableNames.length).to.equal(1);
          chai.expect(varStore.has("e"));
       });
       it('get should return the same value that was entered', function() {
@@ -183,18 +184,18 @@ describe("VariableStore", function() {
          chai.expect(varStore.has("a")).to.be.false;
          chai.expect(varStore.has("c")).to.be.false;
       });
-      it('getVariableNames should return all variable names entered', function() {
+      it('variableNames should return all variable names entered', function() {
          let varStore = new VariableStore();
          varStore.set({name:"a", value:"b"});
          varStore.set({name:"c", value:"d"});
-         let varNames = varStore.getVariableNames();
+         let varNames = varStore.variableNames;
          chai.expect(varNames.indexOf("a") != -1 && varNames.indexOf("c") != -1).to.be.true;
       });
-      it('getVariableObjects should return all variable objects entered', function() {
+      it('variables should return all variable objects entered', function() {
          let varStore = new VariableStore();
          varStore.set({name:"a", value:"b"});
          varStore.set({name:"c", value:"d"});
-         let variables = varStore.getVariableObjects();
+         let variables = varStore.variables;
          chai.expect(variables["a"].value === "b").to.be.true;
          chai.expect(variables["c"].value === "d").to.be.true;
       });

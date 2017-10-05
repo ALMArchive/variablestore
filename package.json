@@ -1,6 +1,6 @@
 {
   "name": "variablestore",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A variable data store using to privately store variables using a map like interface.",
   "main": "variablestore.js",
   "directories": {
@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "mocha test",
-    "ex": "node examples/main-example.js"
+    "ex": "node examples/main-example.js",
+    "exAll": "node examples/runAll.js"
   },
   "repository": {
     "type": "git",

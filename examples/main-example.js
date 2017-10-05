@@ -25,11 +25,11 @@ console.log(varStore.get("a")); // b
 // Add another variable
 varStore.set({name: "b", value: "b"}); // undefined
 
-// Can get all variable names with getVariableNames();
-console.log(varStore.getVariableNames()); // ["a", "b"]
+// Can get all variable names with variableNames;
+console.log(varStore.variableNames); // ["a", "b"]
 
-// Can get all stored objects with getVariableObjects
-console.log(varStore.getVariableObjects()); // [a: {value: "b", const: false}, b: {name: "b", const: false}]
+// Can get all stored objects with variables
+console.log(varStore.variables); // [a: {value: "b", const: false}, b: {name: "b", const: false}]
 
 // Can delete a variable with del
 console.log(varStore.has("a")); // true
@@ -60,17 +60,17 @@ console.log(varStore.get("ans")); // "b"
 // clear will empty all variables, including const
 varStore.set({name: "a", value: "b"});
 varStore.set({name: "b", value: "d"});
-console.log(varStore.getVariableNames()); // ["a", "b"]
+console.log(varStore.variableNames); // ["a", "b"]
 varStore.clear();
-console.log(varStore.getVariableNames()); // []
+console.log(varStore.variableNames); // []
 
 // clearNonConst will empty all variables, except const
 varStore.set({name: "a", value: "b"});
 varStore.set({name: "b", value: "d"});
 varStore.set({name: "c", value: "c", const: true});
-console.log(varStore.getVariableNames()); // ["a", "b", "c"]
+console.log(varStore.variableNames); // ["a", "b", "c"]
 varStore.clearNonConst();
-console.log(varStore.getVariableNames()); // ["c"]
+console.log(varStore.variableNames); // ["c"]
 
 // Variables declared as const cannot have their value change, will throw error
 console.log(varStore.has("c")); // true
