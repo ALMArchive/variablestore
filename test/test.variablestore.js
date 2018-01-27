@@ -1,12 +1,11 @@
 "use strict"
 
-const chai = require('chai');
-const VariableStore = require('../variablestore.js');
+import chai from "chai";
+import VariableStore from "../variablestore";
 
 function isEmpty(obj) {
-    for(var key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) return false;
     }
     return true;
 }
@@ -15,7 +14,6 @@ describe("VariableStore", function() {
    describe("Construction", function() {
       it('Returned object should be VariableStore on empty parameters', function() {
          let varStore = new VariableStore();
-         console.log("SDFSDFSDFSD"+varStore);
          chai.expect(varStore.constructor.name === "VariableStore");
       });
       it('Returned object should be VariableStore on (Regex)', function() {
@@ -27,31 +25,12 @@ describe("VariableStore", function() {
          chai.expect(varStore.constructor.name === "VariableStore");
       });
       it('Error thrown when VariableStore passed object to first parameter', function() {
-         chai.expect(() => new VariableStore({})).to.throw(Error);
-      });
-      it('Error thrown when VariableStore passed number to first parameter', function() {
-         chai.expect(() => new VariableStore(1)).to.throw(Error);
-      });
-      it('Error thrown when VariableStore passed string to first parameter', function() {
-         chai.expect(() => new VariableStore("")).to.throw(Error);
-      });
-      it('Error thrown when VariableStore passed array to first parameter', function() {
-         chai.expect(() => new VariableStore([])).to.throw(Error);
-      });
-      it('Error thrown when VariableStore passed null to first parameter', function() {
-         chai.expect(() => new VariableStore(null)).to.throw(Error);
+         const vals = [{}, 1, "", [], null];
+         vals.map(e => chai.expect(() => new VariableStore(e)).to.throw(Error))
       });
       it('Error thrown when VariableStore given (Regex, {})', function() {
+         const vals = [{}, "", 0, null];
          chai.expect(() => new VariableStore(/s/, {})).to.throw(Error);
-      });
-      it('Error thrown when VariableStore given (Regex, "")', function() {
-         chai.expect(() => new VariableStore(/s/, "")).to.throw(Error);
-      });
-      it('Error thrown when VariableStore given (Regex, 0)', function() {
-         chai.expect(() => new VariableStore(/s/, 0)).to.throw(Error);
-      });
-      it('Error thrown when VariableStore given (Regex, null)', function() {
-         chai.expect(() => new VariableStore(/s/, "")).to.throw(Error);
       });
    });
    describe("No Variables in Store", function() {
@@ -65,6 +44,8 @@ describe("VariableStore", function() {
       });
       it('clear should leave object with no variables', function() {
          let varStore = new VariableStore();
+         varStore.set({name: "test", value: 1});
+         chai.expect(varStore.variableNames.length).to.equal(1);
          varStore.clear();
          chai.expect(varStore.variableNames.length).to.equal(0);
          chai.expect(isEmpty(varStore.variables)).to.be.true;
@@ -74,10 +55,6 @@ describe("VariableStore", function() {
       it('set on empty object should throw error', function() {
          let varStore = new VariableStore();
          chai.expect(() => varStore.set({})).to.throw(Error);
-      });
-      it('set on object with name but no value should throw error', function() {
-         let varStore = new VariableStore();
-         chai.expect(() => varStore.set({name:"a"})).to.throw(Error);
       });
       it('set on object with name but no value should throw error', function() {
          let varStore = new VariableStore();
@@ -199,5 +176,12 @@ describe("VariableStore", function() {
          chai.expect(variables["a"].value === "b").to.be.true;
          chai.expect(variables["c"].value === "d").to.be.true;
       });
+       it('variables shouldbe able to set using an array', function () {
+        let varStore = new VariableStore();
+        varStore.set([{ name: "a", value: "b" }, { name: "c", value: "d" }]);
+        let variables = varStore.variables;
+        chai.expect(variables["a"].value === "b").to.be.true;
+        chai.expect(variables["c"].value === "d").to.be.true;
+       });
    });
 });
