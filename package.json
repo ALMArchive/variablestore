@@ -1,7 +1,7 @@
 {
   "name": "variablestore",
   "version": "0.1.1",
-  "description": "A variable data store using to privately store variables using a map like interface.",
+  "description": "A variable data store used to privately store variables with a map like interface.",
   "main": "variablestore.js",
   "directories": {
     "example": "examples",
