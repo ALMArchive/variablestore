@@ -1,4 +1,4 @@
-const VariableStore = require('../variablestore.js');
+import VariableStore from '../variablestore';
 
 const regex    = /^[a-zA-Z\_]\w*$/;
 const restrictedNames = ["ans"];

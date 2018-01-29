@@ -1,4 +1,4 @@
-const VariableStore = require('../variablestore.js');
+import VariableStore from '../variablestore';
 
 // Initialize your rejex and restrictedNames, and create a new varStore
 const regex    = /^[a-zA-Z\_]\w*$/;

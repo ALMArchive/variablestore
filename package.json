@@ -4,13 +4,13 @@
   "description": "A variable data store used to privately store variables with a map like interface.",
   "main": "variablestore.js",
   "directories": {
-    "example": "examples",
+    "ex": "ex",
     "test": "test"
   },
   "scripts": {
     "test": "mocha test --compilers js:babel-register --require babel-polyfill",
-    "ex": "node examples/main-example.js",
-    "exAll": "node examples/runAll.js"
+    "ex": "node -r @std/esm ex/main-example.js",
+    "exAll": "node -r @std/esm ex/runAll.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
   "homepage": "https://github.com/ALMaclaine/variablestore#readme",
   "dependencies": {},
   "devDependencies": {
+    "@std/esm": "^0.20.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
