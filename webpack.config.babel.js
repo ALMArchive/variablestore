@@ -4,7 +4,6 @@ import path from "path";
 export default {
   entry: {
     "variablestore": "./variablestore.js",
-    "variablestore.min": "./variablestore.js"
   },
   output: {
     path: path.resolve(__dirname, "dist"),
