@@ -6,6 +6,8 @@ export default {
     "variablestore": "./variablestore.js",
   },
   output: {
+    library: "variablestore",
+    libraryTarget: "umd",
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js"
   },
