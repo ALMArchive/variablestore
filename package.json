@@ -1,6 +1,6 @@
 {
   "name": "variablestore",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A variable data store used to privately store variables with a map like interface.",
   "main": "dist/variablestore.js",
   "files": [
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ALMaclaine/variablestore.git"
+    "url": "git+https://github.com/ALMArchive/variablestore.git"
   },
   "keywords": [
     "Variable",
@@ -31,9 +31,9 @@
   "author": "Alessandro Maclaine",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ALMaclaine/variablestore/issues"
+    "url": "https://github.com/ALMArchive/variablestore/issues"
   },
-  "homepage": "https://github.com/ALMaclaine/variablestore#readme",
+  "homepage": "https://github.com/ALMArchive/variablestore#readme",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
